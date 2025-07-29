@@ -31,17 +31,17 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      await mongoose.connect(`${process.env.MONGODB_URI}/AGCInfo`);
+      // await mongoose.connect(`${process.env.MONGODB_URI}/AGCInfo`);
 
-      // Ensure the Profile model is correctly typed if you have a Mongoose schema
-      const oldProfile = await Profile.findOne({ email: user.email });
+      // // Ensure the Profile model is correctly typed if you have a Mongoose schema
+      // const oldProfile = await Profile.findOne({ email: user.email });
 
-      if (oldProfile) {
-        return true; // or return user; depending on your desired behavior
-      }
+      // if (oldProfile) {
+      //   return true; // or return user; depending on your desired behavior
+      // }
 
-      const newProfile = new Profile(user);
-      await newProfile.save();
+      // const newProfile = new Profile(user);
+      // await newProfile.save();
 
       return true;
     },
