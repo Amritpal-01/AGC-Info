@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import Profile from "../../../models/ProfileSchema"; // Assuming this is a Mongoose model
+// import Profile from "../../../models/ProfileSchema"; // Assuming this is a Mongoose model
 
 // Extend the Session and User types to include a custom 'id' property
 declare module "next-auth" {
