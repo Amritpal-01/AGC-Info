@@ -182,7 +182,7 @@ const App: React.FC = () => {
                     <FilterIcon size={20} /> <span className='text-lg'>{showFiltes ? "Hide Filters" : "Show Filters"}</span>
                 </motion.button>
 
-                <div className={`flex flex-wrap flex-1 px-0 md:px-4 gap-y-6 md:gap-y-0 md:gap-x-10 mt-4 md:mt-0  ${!showFiltes && "max-h-0 overflow-hidden"}`}>
+                <div className={`flex flex-wrap flex-1 px-0 md:px-4  md:gap-x-10 mt-4 md:mt-0  ${!showFiltes && "max-h-0 overflow-hidden"}`}>
                     {/* Filter Section: Course */}
                     <div className='w-full md:w-auto mb-6'>
                         <h2 className='font-semibold text-xl text-gray-700 mb-3'>Course</h2>
