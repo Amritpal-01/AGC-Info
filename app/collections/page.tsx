@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { FilterIcon, XCircle } from 'lucide-react';
+import { FilterIcon, SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 
@@ -78,7 +78,7 @@ const CustomDropdown = <T extends string | number>({
                     `}
                 >
                     <span>{selectedValue !== null ? selectedValue : placeholder}</span>
-                    <svg className={`fill-current h-4 w-4 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    <svg className={`fill-current h-4 w-4 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                 </button>
 
                 <AnimatePresence>
@@ -164,16 +164,16 @@ const App: React.FC = () => {
     const handleRemoveSemester = () => setSelectedSemester(null);
 
     return (
-        <div className='w-dvw overflow-hidden'>
+        <div className='overflow-y-scroll'>
             <Navbar />
-           <div className='px-4 sm:px-6 md:px-10 py-5 w-full flex flex-col md:flex-row gap-3 border-b border-black/20'>
+            <div className='px-4 sm:px-6 md:px-10 py-5 w-full flex flex-col md:flex-row gap-3'>
                 {/* Filter button with motion animation */}
                 <motion.button
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => {setShowFilters(!showFiltes)}}
-                    className={`${showFiltes?"text-red-700 hover:bg-red-200 bg-red-100 border border-red-300":"text-green-700 hover:bg-green-200 bg-green-100 border border-green-300"} px-4 py-2 w-full md:w-fit h-10 rounded-xl flex items-center justify-center md:justify-around gap-2 text-lg font-medium shadow-sm transition-colors duration-200`}
+                    onClick={() => { setShowFilters(!showFiltes) }}
+                    className={`${showFiltes ? "text-red-700 hover:bg-red-200 bg-red-100 border border-red-300" : "text-green-700 hover:bg-green-200 bg-green-100 border border-green-300"} px-4 py-2 w-full md:w-fit h-10 rounded-xl flex items-center justify-center md:justify-around gap-2 text-lg font-medium shadow-sm transition-colors duration-200`}
                 >
-                    <FilterIcon size={20} /> <span className='text-lg'>{showFiltes?"Hide Filters": "Show Filters"}</span>
+                    <FilterIcon size={20} /> <span className='text-lg'>{showFiltes ? "Hide Filters" : "Show Filters"}</span>
                 </motion.button>
 
                 <div className={`flex flex-wrap flex-1 px-0 md:px-4 gap-y-6 md:gap-y-0 md:gap-x-10 mt-4 md:mt-0  ${!showFiltes && "max-h-0 overflow-hidden"}`}>
@@ -217,6 +217,17 @@ const App: React.FC = () => {
                         placeholder="Select Semester"
                     />
                 </div>
+            </div>
+            <div className='w-full flex pb-5 border-b border-black/20'>
+
+                <div className='flex gap-3 relative items-center min-w-10 min-h-10 px-2 w-full'>
+                    <div className='absolute px-2'>
+                        <SearchIcon />
+                    </div>
+                    <input type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
+                    <button className='bg-green-100 hover:bg-green-200 h-full w-20 border border-green-300 rounded-xl text-green-700'>Search</button>
+                </div>
+
             </div>
 
             {/* Display Selected Filters with Remove Option */}
