@@ -26,7 +26,7 @@ export default function Home() {
       </header>
 
       {/* Welcome Section */}
-      <section className="w-full max-w-4xl text-black p-8 mb-8 text-center relative overflow-hidden">
+      <section className="w-full max-w-4xl text-black px-8 pb-8 mb-8 text-center relative overflow-hidden">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
           Welcome to our Platform
         </h1>
