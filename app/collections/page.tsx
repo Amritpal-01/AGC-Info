@@ -63,7 +63,7 @@ const CustomDropdown = <T extends string | number>({
     };
 
     return (
-        <div className='w-44 mb-6 mx-2' ref={dropdownRef}>
+        <div className='w-48 mb-6 mx-2' ref={dropdownRef}>
             <h2 className='font-semibold text-xl text-gray-700 mb-3'>{label}</h2>
             <div className='relative'>
                 <button
