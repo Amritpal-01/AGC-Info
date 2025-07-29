@@ -63,7 +63,7 @@ const CustomDropdown = <T extends string | number>({
     };
 
     return (
-        <div className='w-full md:w-auto min-w-44 mb-6' ref={dropdownRef}>
+        <div className='w-44 mb-6 mx-2' ref={dropdownRef}>
             <h2 className='font-semibold text-xl text-gray-700 mb-3'>{label}</h2>
             <div className='relative'>
                 <button
@@ -129,6 +129,7 @@ const App: React.FC = () => {
     const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
     const [selectedYear, setSelectedYear] = useState<string | null>(null);
     const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
+    const [showFiltes, setShowFilters] = useState<boolean>(true);
 
     // State to hold the combined filter object
     const [filterObject, setFilterObject] = useState<{
@@ -169,12 +170,13 @@ const App: React.FC = () => {
                 {/* Filter button with motion animation */}
                 <motion.button
                     whileTap={{ scale: 0.95 }}
-                    className={`text-green-700 bg-green-100 border border-green-300 px-4 py-2 w-full md:w-fit h-10 rounded-xl flex items-center justify-center md:justify-around gap-2 text-lg font-medium shadow-sm hover:bg-green-200 transition-colors duration-200`}
+                    onClick={() => {setShowFilters(!showFiltes)}}
+                    className={`${showFiltes?"text-red-700 hover:bg-red-200 bg-red-100 border border-red-300":"text-green-700 hover:bg-green-200 bg-green-100 border border-green-300"} px-4 py-2 w-full md:w-fit h-10 rounded-xl flex items-center justify-center md:justify-around gap-2 text-lg font-medium shadow-sm transition-colors duration-200`}
                 >
-                    <FilterIcon size={20} /> <span className='text-lg'>Filters</span>
+                    <FilterIcon size={20} /> <span className='text-lg'>{showFiltes?"Hide Filters": "Show Filters"}</span>
                 </motion.button>
 
-                <div className='flex flex-wrap flex-1 px-0 md:px-4 gap-y-6 md:gap-y-0 md:gap-x-10 mt-4 md:mt-0'>
+                <div className={`flex flex-wrap flex-1 px-0 md:px-4 gap-y-6 md:gap-y-0 md:gap-x-10 mt-4 md:mt-0  ${!showFiltes && "max-h-0 overflow-hidden"}`}>
                     {/* Filter Section: Course */}
                     <div className='w-full md:w-auto mb-6'>
                         <h2 className='font-semibold text-xl text-gray-700 mb-3'>Course</h2>
