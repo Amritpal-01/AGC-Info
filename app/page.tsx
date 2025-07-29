@@ -21,7 +21,7 @@ export default function Home() {
 
       {/* Header Section */}
       <header className="w-full p-4 mb-8 flex justify-between items-center">
-        <div className="text-3xl font-bold text-black">AGC<span className="text-[#E86CB7]">.</span><span className="text-[#7D7D7D] font-semibold text-[24px]">Info</span></div>
+        <div className="text-3xl font-bold text-[#6ca8e8]">AGC<span className="text-[#e28f8f]">.</span><span className="text-[#7D7D7D] font-semibold text-[24px]">Info</span></div>
         {/* You can add navigation links or user profile here if needed */}
       </header>
 
@@ -47,7 +47,7 @@ export default function Home() {
         className="py-5"
         >
         <div className="flex items-center justify-center w-48 px-4 h-14 rounded-2xl cursor-pointer bg-[#ffffff] border border-black/20 overflow-hidden relative">
-          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-300
+          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
                 ${isSigning ? "opacity-0" : "opacity-100"}
               `}>
             <Google />
@@ -71,7 +71,7 @@ export default function Home() {
         className="py-5"
         >
         <div className="flex items-center justify-center w-64 px-4 h-14 rounded-2xl cursor-pointer text-blue-500 bg-[#ffffff] border border-black/20 overflow-hidden relative">
-          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-300
+          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
                 ${isSigning ? "opacity-0" : "opacity-100"}
               `}>
             <EyeIcon/>
@@ -150,7 +150,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Monthly Votes Card */}
           <div className="bg-orange-100 rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-4">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-100 ease-in-out transform hover:scale-105 mb-4">
               Monthly votes
             </button>
             <p className="text-gray-800 text-lg font-medium">
@@ -161,7 +161,7 @@ export default function Home() {
 
           {/* Weekly Votes Card */}
           <div className="bg-gray-200 rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center">
-            <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-4">
+            <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-100 ease-in-out transform hover:scale-105 mb-4">
               Weekly votes
             </button>
             <p className="text-gray-800 text-lg font-medium">

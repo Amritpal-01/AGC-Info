@@ -42,8 +42,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    if(!session === null) return;
-    if(!session && pathname !== "/") redirect("/")
+    if(!session === undefined) return;
+    if(session === null && pathname !== "/") redirect("/")
 
     getUser();
 

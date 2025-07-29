@@ -20,6 +20,7 @@ import {
   ViewIcon
 } from 'lucide-react'; // Importing icons from lucide-react
 import Footer from '@/components/Footer'
+import { motion } from 'motion/react'
 
 // Mock data for demonstration purposes
 interface Collection {
@@ -117,12 +118,12 @@ const Page: React.FC = () => {
             {collections.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-gray-500 mb-4">You don&apos;t have any collections yet.</p>
-                <button
+                <motion.button
                   className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <PlusCircle className="w-5 h-5 mr-2" />
                   Create New Collection
-                </button>
+                </motion.button>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -141,21 +142,21 @@ const Page: React.FC = () => {
                     {collection.items && collection.items.length > 0 && (
                       <p className="text-sm text-gray-500 ">Items: {collection.items.join(', ')}</p>
                     )}
-                    <button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</button>
+                    <motion.button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</motion.button>
                   </div>
                 ))}
                 <div className="mt-6 text-center">
-                  <button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+                  <motion.button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
                     <ViewIcon className="w-4 h-4 mr-2" />
                     View All Collections
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="mt-6 text-center">
-                  <button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+                  <motion.button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
 
                     <PlusCircle className="w-5 h-5 mr-2" />
                     Create New Collection
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             )}
@@ -187,16 +188,16 @@ const Page: React.FC = () => {
                       <p className="font-medium text-gray-800">{community.name}</p>
                       <p className="text-sm text-gray-500 w-44">{community.topic} &bull; {community.members.toLocaleString()} members</p>
                     </div>
-                    <button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Join Chat &rarr;</button>
+                    <motion.button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Join Chat &rarr;</motion.button>
                   </li>
                 ))}
               </ul>
             )}
             <div className="mt-6 text-center">
-              <button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
                 <Search className="w-4 h-4 mr-2" />
                 Explore More Communities
-              </button>
+              </motion.button>
             </div>
           </div>
         </section>
@@ -217,9 +218,9 @@ const Page: React.FC = () => {
                 {userQuestions.map(question => (
                   <li key={question.id} className="bg-gray-50 rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 flex items-start">
                     <div className="flex flex-col items-center mr-4">
-                      <button className="text-gray-400 hover:text-indigo-600 transition-colors">▲</button>
+                      <motion.button className="text-gray-400 hover:text-indigo-600 transition-colors">▲</motion.button>
                       <span className="font-bold text-gray-700">{question.upvotes}</span>
-                      <button className="text-gray-400 hover:text-indigo-600 transition-colors">▼</button>
+                      <motion.button className="text-gray-400 hover:text-indigo-600 transition-colors">▼</motion.button>
                     </div>
                     <div className="flex-grow">
                       <h3 className="text-lg font-medium text-gray-800 mb-1">{question.title}</h3>
@@ -228,17 +229,17 @@ const Page: React.FC = () => {
                         <MessageSquare className="w-4 h-4 mr-1" />
                         <span>{question.answers} Answers</span>
                       </div>
-                      <button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Discussion &rarr;</button>
+                      <motion.button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Discussion &rarr;</motion.button>
                     </div>
                   </li>
                 ))}
               </ul>
             )}
             <div className="mt-6 text-center">
-              <button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
                 <PlusCircle className="w-4 h-4 mr-2" />
                 Ask a New Question
-              </button>
+              </motion.button>
             </div>
           </div>
         </section>
