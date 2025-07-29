@@ -22,7 +22,13 @@ const enrollYear: string[] = [
 
 const semesters: number[] = [
     1,
-    2
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
 ]
 
 // Custom Dropdown Component
