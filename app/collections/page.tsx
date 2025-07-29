@@ -1,8 +1,9 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { FilterIcon, SearchIcon, XCircle } from 'lucide-react';
+import {  ArrowLeft, ArrowRight, FilterIcon, SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 
 
@@ -170,7 +171,7 @@ const App: React.FC = () => {
     const handleRemoveSemester = () => setSelectedSemester(null);
 
     return (
-        <div className='overflow-y-scroll'>
+        <div className=''>
             <Navbar />
             <div className='px-4 sm:px-6 md:px-10 py-5 w-full flex flex-col md:flex-row gap-3'>
                 {/* Filter button with motion animation */}
@@ -226,7 +227,7 @@ const App: React.FC = () => {
             </div>
             <div className='w-full flex pb-5 border-b border-black/20'>
 
-                <div className='flex gap-3 relative items-center min-w-10 min-h-10 px-2 w-full'>
+                <div className='flex gap-3 relative items-center min-w-10 min-h-10 px-3 sm:px-10 w-full'>
                     <div className='absolute px-2'>
                         <SearchIcon />
                     </div>
@@ -267,7 +268,16 @@ const App: React.FC = () => {
                         <p className="text-gray-500">No filters applied.</p>
                     )}
                 </div>
+                <main className='w-full min-h-52'>
+
+                </main>
+                <div className='w-full flex justify-center items-center gap-2'>
+                    <div className='h-12 w-12 flex justify-center items-center border border-red-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowLeft/></div>
+                    <h1 className='font-semibold'>Page <span>1</span> of <span>1</span></h1>
+                    <div className='h-12 w-12 flex justify-center items-center border border-green-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowRight/></div>
+                </div>
             </div>
+            <Footer/>
         </div>
     )
 }
