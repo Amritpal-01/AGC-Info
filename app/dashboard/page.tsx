@@ -100,7 +100,7 @@ const Page: React.FC = () => {
       <Navbar/>
       <header className="mb-8 text-center py-5">
         <h1 className="text-4xl font-bold text-indigo-700 mb-2">Your Dashboard</h1>
-        <p className="text-lg text-gray-600">Welcome back! Here&apos;s a quick overview of your academic journey.</p>
+        <p className="text-lg text-gray-600 px-2">Welcome back! Here&apos;s a quick overview of your academic journey.</p>
       </header>
 
       <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -164,41 +164,6 @@ const Page: React.FC = () => {
 
           </>
         </section>
-
-        {/* Attendance Stats Section */}
-        {/* <section className="bg-white rounded-xl shadow-lg p-6">
-          <div className="flex justify-between items-center mb-4 cursor-pointer" >
-            <h2 className="text-2xl font-semibold text-indigo-600 flex items-center">
-              <BarChart2 className="w-7 h-7 mr-3 text-indigo-500" />
-              Attendance Stats
-            </h2>
-            </div>
-         
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-center flex-1">
-                  <p className="text-4xl font-bold text-indigo-700">{attendanceStats.percentage}%</p>
-                  <p className="text-sm text-gray-500">Overall Attendance</p>
-                </div>
-                <div className="text-center flex-1">
-                  <p className="text-2xl font-semibold text-gray-700">{attendanceStats.attendedClasses}/{attendanceStats.totalClasses}</p>
-                  <p className="text-sm text-gray-500">Classes Attended</p>
-                </div>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                <div
-                  className="bg-indigo-600 h-2.5 rounded-full"
-                  style={{ width: `${attendanceStats.percentage}%` }}
-                ></div>
-              </div>
-              <div className="bg-indigo-50 rounded-lg p-4 text-sm text-indigo-800 border border-indigo-200">
-                <h3 className="font-semibold mb-2 flex items-center">
-                  <span className="mr-2">✨</span> AI Summary
-                </h3>
-                <p>{attendanceStats.aiSummary}</p>
-              </div>
-            </div>
-        </section> */}
 
         {/* Communities Section */}
         <section className="bg-white rounded-xl shadow-lg p-6 lg:col-span-1">

@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import Profile from "../../../models/ProfileSchema"; // Assuming this is a Mongoose model
+import Profile from "../../../models/ProfileSchema"; 
 
-// Extend the Session and User types to include a custom 'id' property
 declare module "next-auth" {
   interface Session {
     user: {
@@ -33,11 +32,10 @@ const handler = NextAuth({
     async signIn({ user }) {
       await mongoose.connect(`${process.env.MONGODB_URI}/AGCInfo`);
 
-      // Ensure the Profile model is correctly typed if you have a Mongoose schema
       const oldProfile = await Profile.findOne({ email: user.email });
 
       if (oldProfile) {
-        return true; // or return user; depending on your desired behavior
+        return true; 
       }
 
       const newProfile = new Profile(user);
