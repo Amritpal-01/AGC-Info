@@ -150,7 +150,7 @@ const App: React.FC = () => {
         });
         console.log(filterObject)
         // You can log the filterObject here to see its current state
-    }, [selectedCourse, selectedYear, selectedSemester, filterObject]);
+    }, [selectedCourse, selectedYear, selectedSemester]);
 
     // Handler for course button clicks
     const handleCourseClick = (course: string) => {
@@ -163,7 +163,7 @@ const App: React.FC = () => {
     const handleRemoveSemester = () => setSelectedSemester(null);
 
     return (
-        <div className='w-dvw font-sans'>
+        <div className='w-dvw overflow-hidden'>
             <Navbar />
            <div className='px-4 sm:px-6 md:px-10 py-5 w-full flex flex-col md:flex-row gap-3 border-b border-black/20'>
                 {/* Filter button with motion animation */}
