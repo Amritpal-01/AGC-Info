@@ -225,7 +225,6 @@ const App: React.FC = () => {
                         <SearchIcon />
                     </div>
                     <input type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
-                    <button className='bg-green-100 hover:bg-green-200 h-full w-20 border border-green-300 rounded-xl text-green-700'>Search</button>
                 </div>
 
             </div>
