@@ -1,5 +1,5 @@
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
-import { ClubIcon, HomeIcon, LogOutIcon, MenuIcon, SearchIcon } from 'lucide-react'
+import {  HomeIcon, LogOutIcon, MenuIcon, SearchIcon } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from 'motion/react'

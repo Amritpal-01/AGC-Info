@@ -21,7 +21,7 @@ export default function Home() {
 
       {/* Header Section */}
       <header className="w-full p-4 mb-8 flex justify-between items-center">
-        <div className="text-3xl font-bold text-[#6C7DE8]">AGC<span className="text-[#E86CB7]">.</span><span className="text-[#7D7D7D] font-semibold">Info</span></div>
+        <div className="text-3xl font-bold text-black">AGC<span className="text-[#E86CB7]">.</span><span className="text-[#7D7D7D] font-semibold text-[24px]">Info</span></div>
         {/* You can add navigation links or user profile here if needed */}
       </header>
 
