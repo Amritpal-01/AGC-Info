@@ -18,10 +18,10 @@ const Navbar: React.FC = () => {
     }
   };
 
-  return (
+  return (i
     <div className='w-full flex justify-between p-4'>
       <div className='flex gap-2 items-center relative'>
-        <div className='w-12 aspect-square bg-black rounded-full relative overflow-hidden'
+        <div className='sm:w-12 w-10 aspect-square bg-black rounded-full relative overflow-hidden'
           onClick={() => { setShowProfileOptions(!showProfileOptions) }}
         >
           {session?.user?.image && <Image
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             className='object-cover'
           />}
         </div>
-        <h1 className='text-lg font-semibold max-[600px]:flex max-[750px]:hidden'>{session?.user?.name}</h1>
+        <h1 className='sm:text-lg text-md font-semibold max-[600px]:flex max-[750px]:hidden'>{session?.user?.name}</h1>
 
         <div className={`${showProfileOptions ? "w-44 p-2 border border-black/10" : "w-0 p-0"} transition-all duration-300  overflow-hidden bg-white shadow-lg shadow-gray-300  rounded-xl absolute -bottom-16 left-0 text-white`}>
           <motion.button
