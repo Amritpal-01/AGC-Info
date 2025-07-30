@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
         </div>
         <h1 className='text-lg font-semibold max-[600px]:flex max-[750px]:hidden'>{session?.user?.name}</h1>
 
-        <div className={`${showProfileOptions ? "w-44 p-2" : "w-0 p-0"} transition-all duration-300  overflow-hidden bg-white shadow-lg shadow-gray-300 border border-black/10 rounded-xl absolute -bottom-16 left-0 text-white`}>
+        <div className={`${showProfileOptions ? "w-44 p-2 border border-black/10" : "w-0 p-0"} transition-all duration-300  overflow-hidden bg-white shadow-lg shadow-gray-300  rounded-xl absolute -bottom-16 left-0 text-white`}>
           <motion.button
             className='flex gap-2 text-red-400 w-40 h-8 overflow-hidden hover:bg-red-100 p-1 rounded-lg'
             whileTap={{ scale: 0.95 }}
