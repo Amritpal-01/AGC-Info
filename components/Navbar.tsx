@@ -6,8 +6,10 @@ import { motion } from 'motion/react'
 import { signOut } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { usePathname } from 'next/navigation'
+import { StateContextType, useStateContext } from '@/contexts/StateContext'
 
 const Navbar: React.FC = () => {
+  const {collectionSearch, setCollectionSearch} = useStateContext() as StateContextType;
   const { session } = useAuth() as AuthContextType
   const pathname = usePathname();
   const [showProfileOptions, setShowProfileOptions] = useState<boolean>(false)
@@ -50,7 +52,7 @@ const Navbar: React.FC = () => {
         {pathname !== "/collections" && <><div className='absolute px-2 max-[600px]:hidden'>
           <SearchIcon />
         </div>
-          <input onKeyDown={handleKeyDown} type='search' onSubmit={() => { redirect("/collections") }} className=' max-[600px]:hidden bg-blue-100 border border-black/10 shadow-lg shadow-gray-200 w-96 pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' /></>}
+          <input  onChange={(e) => {setCollectionSearch(e.target.value)}} value={collectionSearch} onKeyDown={handleKeyDown} type='search' onSubmit={() => { redirect("/collections") }} className=' max-[600px]:hidden bg-blue-100 border border-black/10 shadow-lg shadow-gray-200 w-96 pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' /></>}
         {pathname !== "/collections" && <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className={`min-[600px]:hidden text-blue-700 bg-blue-100 border border-blue-300 w-10 h-10 rounded-xl flex items-center justify-center`}><SearchIcon /></motion.button>}
         {pathname !== "/dashboard" && <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/dashboard") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><DraftingCompassIcon /></motion.button>}
         <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><InfoIcon /></motion.button>

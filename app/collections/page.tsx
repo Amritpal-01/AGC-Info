@@ -4,8 +4,7 @@ import {  ArrowLeft, ArrowRight, FilterIcon, SearchIcon, XCircle } from 'lucide-
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
-
+import { StateContextType, useStateContext } from '@/contexts/StateContext';
 
 const courses: string[] = [
     "BCA",
@@ -137,6 +136,7 @@ const App: React.FC = () => {
     const [selectedYear, setSelectedYear] = useState<string | null>(null);
     const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
     const [showFiltes, setShowFilters] = useState<boolean>(true);
+    const {collectionSearch, setCollectionSearch} = useStateContext() as StateContextType;
 
     // State to hold the combined filter object
     const [filterObject, setFilterObject] = useState<{
@@ -156,7 +156,6 @@ const App: React.FC = () => {
             year: selectedYear,
             semester: selectedSemester,
         });
-        console.log(filterObject)
         // You can log the filterObject here to see its current state
     }, [selectedCourse, selectedYear, selectedSemester]);
 
@@ -169,6 +168,10 @@ const App: React.FC = () => {
     const handleRemoveCourse = () => setSelectedCourse(null);
     const handleRemoveYear = () => setSelectedYear(null);
     const handleRemoveSemester = () => setSelectedSemester(null);
+
+    useEffect(() => {
+
+    },[collectionSearch, filterObject])
 
     return (
         <div className=''>
@@ -231,7 +234,7 @@ const App: React.FC = () => {
                     <div className='absolute px-2'>
                         <SearchIcon />
                     </div>
-                    <input type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
+                    <input onChange={(e) => {setCollectionSearch(e.target.value)}} value={collectionSearch} type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
                 </div>
 
             </div>
@@ -269,7 +272,7 @@ const App: React.FC = () => {
                     )}
                 </div>
                 <main className='w-full min-h-52'>
-
+                    
                 </main>
                 <div className='w-full flex justify-center items-center gap-2'>
                     <div className='h-12 w-12 flex justify-center items-center border border-red-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowLeft/></div>
