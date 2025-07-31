@@ -30,7 +30,7 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      await mongoose.connect(`${process.env.MONGODB_URI}/AGCInfo`);
+      await mongoose.connect(`${process.env.MONGODB_URI}/test`);
 
       const oldProfile = await Profile.findOne({ email: user.email });
 
@@ -38,7 +38,11 @@ const handler = NextAuth({
         return true; 
       }
 
-      const newProfile = new Profile(user);
+      const newProfile = new Profile({
+        ...user,
+        collections : []
+      });
+      
       await newProfile.save();
 
       return true;

@@ -2,7 +2,6 @@
 
 import Navbar from '@/components/Navbar'
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
-// import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import {
@@ -17,7 +16,7 @@ import {
   Globe,
   HelpCircle,
   Search,
-  ViewIcon
+  Eye
 } from 'lucide-react'; // Importing icons from lucide-react
 import Footer from '@/components/Footer'
 import { motion } from 'motion/react'
@@ -119,7 +118,7 @@ const Page: React.FC = () => {
               <div className="text-center py-8">
                 <p className="text-gray-500 mb-4">You don&apos;t have any collections yet.</p>
                 <motion.button
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700  transform hover:scale-105"
                 >
                   <PlusCircle className="w-5 h-5 mr-2" />
                   Create New Collection
@@ -146,16 +145,16 @@ const Page: React.FC = () => {
                   </div>
                 ))}
                 <div className="mt-6 text-center">
-                  <motion.button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
-                    <ViewIcon className="w-4 h-4 mr-2" />
+                  <motion.button whileTap={{scale: 0.95}} onClick={() => {redirect("/collections")}} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
+                    <Eye className="w-5 h-5 mr-2" />
                     View All Collections
                   </motion.button>
                 </div>
                 <div className="mt-6 text-center">
-                  <motion.button className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+                  <motion.button whileTap={{scale: 0.95}} onClick={() => {redirect("/collections")}} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
 
                     <PlusCircle className="w-5 h-5 mr-2" />
-                    Create New Collection
+                    Add New Collection
                   </motion.button>
                 </div>
               </div>
@@ -194,7 +193,7 @@ const Page: React.FC = () => {
               </ul>
             )}
             <div className="mt-6 text-center">
-              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 ">
                 <Search className="w-4 h-4 mr-2" />
                 Explore More Communities
               </motion.button>
@@ -236,7 +235,7 @@ const Page: React.FC = () => {
               </ul>
             )}
             <div className="mt-6 text-center">
-              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out">
+              <motion.button className="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 ">
                 <PlusCircle className="w-4 h-4 mr-2" />
                 Ask a New Question
               </motion.button>

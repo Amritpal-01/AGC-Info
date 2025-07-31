@@ -1,10 +1,11 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { FilterIcon, Globe, SearchIcon, XCircle } from 'lucide-react';
+import { FilterIcon,  SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { StateContextType, useStateContext } from '@/contexts/StateContext';
+import Collection from '@/components/Collection';
 
 const courses: string[] = [
     "BCA",
@@ -320,17 +321,7 @@ const App: React.FC = () => {
                         <span className="spinner w-10 aspect-square absolute" />
                     </div>}
                     {collections.map(collection => (
-                        <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
-                            <div className="flex items-center mb-2">
-                                <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.title}</h3>
-                                <Globe className="w-4 h-4 ml-auto text-green-600" />
-                            </div>
-                            <p className="text-sm text-gray-600 mb-2 capitalize">Type: {collection.type}</p>
-                            {collection.items && collection.items.length > 0 && (
-                                <p className="text-sm text-gray-500 ">Items: {collection.items.join(', ')}</p>
-                            )}
-                            <motion.button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</motion.button>
-                        </div>
+                        <Collection key={collection.id} collection={collection}/>
                     ))}
                 </main>
                 {/* <div className='w-full flex justify-center items-center gap-2'>

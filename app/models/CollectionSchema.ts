@@ -3,7 +3,7 @@
 import mongoose, { model, Schema } from "mongoose";
 
 
-const CollectionSchema = new Schema({
+export const CollectionSchema = new Schema({
     course : String,
     year : Number,
     subject : String,

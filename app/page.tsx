@@ -8,7 +8,7 @@ import {  useState } from "react";
 import Footer from "@/components/Footer";
 import { AuthContextType, useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
-import {  EyeIcon } from "lucide-react";
+import {  CrownIcon, EyeIcon, FastForward, MessageCircleMore, PenIcon } from "lucide-react";
 
 export default function Home() {
   const {session} = useAuth() as AuthContextType
@@ -91,10 +91,10 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-gray-800 mb-6">Offerings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Q&A Platform */}
-          <div className="flex items-start p-4 bg-blue-50 rounded-lg shadow-sm">
-            <svg className="w-8 h-8 text-blue-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9.228a2.99 2.99 0 011.658-2.996 2.99 2.99 0 013.884 0 2.99 2.99 0 011.658 2.996m-1.658 2.996a2.99 2.99 0 00-1.658 2.996 2.99 2.99 0 003.884 0 2.99 2.99 0 001.658-2.996M10 18a2 2 0 100-4 2 2 0 000 4zM16 18a2 2 0 100-4 2 2 0 000 4z"></path>
-            </svg>
+          <div className="flex items-start p-4 bg-blue-50 rounded-lg shadow-sm ">
+            <div className="w-8 h-8 text-blue-600 mr-4 flex-shrink-0">
+              <CrownIcon/>
+            </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Q&A Platform</h3>
               <p className="text-gray-700 text-sm">
@@ -105,9 +105,9 @@ export default function Home() {
 
           {/* Quick Access */}
           <div className="flex items-start p-4 bg-green-50 rounded-lg shadow-sm">
-            <svg className="w-8 h-8 text-green-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
+            <div className="w-8 h-8 text-green-600 mr-4 flex-shrink-0">
+              <FastForward/>
+            </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Quick Access</h3>
               <p className="text-gray-700 text-sm">
@@ -118,9 +118,9 @@ export default function Home() {
 
           {/* Attendance Monitor */}
           <div className="flex items-start p-4 bg-purple-50 rounded-lg shadow-sm">
-            <svg className="w-8 h-8 text-purple-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-            </svg>
+            <div className="w-8 h-8 text-purple-600 mr-4 flex-shrink-0">
+              <PenIcon/>
+            </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Attendance Monitor</h3>
               <p className="text-gray-700 text-sm">
@@ -131,9 +131,9 @@ export default function Home() {
 
           {/* Global Chats */}
           <div className="flex items-start p-4 bg-red-50 rounded-lg shadow-sm">
-            <svg className="w-8 h-8 text-red-600 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
+            <div className="w-8 h-8 text-red-600 mr-4 flex-shrink-0">
+              <MessageCircleMore/>
+            </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Global Chats</h3>
               <p className="text-gray-700 text-sm">

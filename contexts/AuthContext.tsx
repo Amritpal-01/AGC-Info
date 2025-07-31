@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    if(!session === undefined) return;
+    if(session === undefined) return;
     if(session === null && pathname !== "/") redirect("/")
 
     getUser();
@@ -51,6 +51,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       getUser();
     } 
   },[session])
+
+  if(session === undefined) return <></>
   
   if(!session && pathname !== "/") return <></>
 
