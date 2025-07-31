@@ -138,6 +138,7 @@ export interface collectionType {
     title: string;
     items: string[];
     created_at: string ; 
+    id: string
 }
 
 
@@ -187,7 +188,7 @@ const App: React.FC = () => {
                 // 1. Await the fetch call to get the Response object
                 const response = await fetch("/api/collection", {
                     method: "POST",
-                    body: JSON.stringify(filterObject)
+                    body: JSON.stringify({...filterObject, searchFilter : collectionSearch.trim()})
                 });
 
                 if (!response.ok) {
@@ -310,7 +311,7 @@ const App: React.FC = () => {
                 </div>
                 <main className='max-w-full flex flex-wrap gap-3 py-5 min-h-52'>
                     {collections.map(collection => (
-                        <div key={collection.title} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
+                        <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
                             <div className="flex items-center mb-2">
                                 <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.title}</h3>
                                     <Globe className="w-4 h-4 ml-auto text-green-600" />
