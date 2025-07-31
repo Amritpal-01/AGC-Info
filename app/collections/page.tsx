@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import {  FilterIcon, Globe,  SearchIcon, XCircle } from 'lucide-react';
+import { FilterIcon, Globe, SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -137,7 +137,7 @@ export interface collectionType {
     type: string;
     title: string;
     items: string[];
-    created_at: string ; 
+    created_at: string;
     id: string
 }
 
@@ -150,6 +150,7 @@ const App: React.FC = () => {
     const [showFiltes, setShowFilters] = useState<boolean>(true);
     const { collectionSearch, setCollectionSearch } = useStateContext() as StateContextType;
     const [collections, setCollections] = useState<collectionType[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     // State to hold the combined filter object
     const [filterObject, setFilterObject] = useState<{
@@ -185,10 +186,11 @@ const App: React.FC = () => {
     useEffect(() => {
         const getCollections = async () => {
             try {
+                setIsLoading(true)
                 // 1. Await the fetch call to get the Response object
                 const response = await fetch("/api/collection", {
                     method: "POST",
-                    body: JSON.stringify({...filterObject, searchFilter : collectionSearch.trim()})
+                    body: JSON.stringify({ ...filterObject, searchFilter: collectionSearch.trim() })
                 });
 
                 if (!response.ok) {
@@ -200,12 +202,15 @@ const App: React.FC = () => {
                 const data = await response.json();
 
                 setCollections(data.collections)
+                setIsLoading(false)
 
             } catch (error) {
+                setIsLoading(false)
                 console.error("Failed to fetch collections:", error);
 
                 throw error;
             }
+
         };
 
         getCollections()
@@ -309,12 +314,15 @@ const App: React.FC = () => {
                         <p className="text-gray-500">No filters applied.</p>
                     )}
                 </div>
-                <main className='max-w-full flex flex-wrap gap-3 py-5 min-h-52'>
+                <main className='max-w-full flex flex-wrap items-start gap-3 py-5 min-h-dvh'>
+                    {(isLoading && collections.length === 0) && <div className='w-full flex justify-center'>
+                        <span className="spinner w-10 aspect-square absolute" />
+                    </div>}
                     {collections.map(collection => (
                         <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
                             <div className="flex items-center mb-2">
                                 <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.title}</h3>
-                                    <Globe className="w-4 h-4 ml-auto text-green-600" />
+                                <Globe className="w-4 h-4 ml-auto text-green-600" />
                             </div>
                             <p className="text-sm text-gray-600 mb-2 capitalize">Type: {collection.type}</p>
                             {collection.items && collection.items.length > 0 && (
