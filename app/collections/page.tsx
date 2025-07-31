@@ -273,11 +273,12 @@ const App: React.FC = () => {
             </div>
             <div className='w-full flex pb-5 border-b border-black/20'>
 
-                <div className='flex gap-3 relative items-center min-w-10 min-h-10 px-3 sm:px-10 w-full'>
+                <div className='flex gap-3 relative items-center min-w-10 min-h-10 px-3 sm:px-10'>
                     <div className='absolute px-2'>
                         <SearchIcon />
                     </div>
-                    <input onChange={(e) => { setCollectionSearch(e.target.value) }} value={collectionSearch} type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
+                    {(isLoading && collections.length !== 0) && <span className="spinner w-7 aspect-square absolute min-[700px]:right-0 right-12 max-[600px]:right-4" />}
+                    <input onChange={(e) => { setCollectionSearch(e.target.value) }} value={collectionSearch} type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
                 </div>
 
             </div>
