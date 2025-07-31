@@ -321,7 +321,7 @@ const App: React.FC = () => {
                         <span className="spinner w-10 aspect-square absolute" />
                     </div>}
                     {collections.map(collection => (
-                        <Collection key={collection.id} collection={collection}/>
+                        <Collection key={collection.id} collection={collection}  path={"collections"}/>
                     ))}
                 </main>
                 {/* <div className='w-full flex justify-center items-center gap-2'>

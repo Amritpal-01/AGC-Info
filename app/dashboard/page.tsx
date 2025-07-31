@@ -3,32 +3,20 @@
 import Navbar from '@/components/Navbar'
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
 import { redirect } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, } from 'react'
 import {
   BookOpen,
-  Calendar,
-  ClipboardList,
-  GraduationCap,
   Users,
   MessageSquare,
   PlusCircle,
-  Lock,
-  Globe,
   HelpCircle,
   Search,
   Eye
 } from 'lucide-react'; // Importing icons from lucide-react
 import Footer from '@/components/Footer'
 import { motion } from 'motion/react'
+import Collection from '@/components/Collection'
 
-// Mock data for demonstration purposes
-interface Collection {
-  id: string;
-  name: string;
-  type: 'course' | 'timetable' | 'notes' | 'assignments' | 'other';
-  isPublic: boolean;
-  items?: string[]; // Example items within a collection
-}
 
 interface Community {
   id: string;
@@ -47,16 +35,9 @@ interface Question {
 }
 
 const Page: React.FC = () => {
-  const { session } = useAuth() as AuthContextType
+  const { session, collections } = useAuth() as AuthContextType
 
   // State for mock collections (initially empty to show 'create collection' option)
-  // const [collections, setCollections] = useState<Collection[]>([]);
-  const [collections] = useState<Collection[]>([
-    { id: 'c1', name: 'Web Dev 101', type: 'course', isPublic: false, items: ['HTML Basics', 'CSS Styling'] },
-    { id: 'c2', name: 'Fall 2024 Schedule', type: 'timetable', isPublic: true, items: ['Monday Classes', 'Exam Dates'] },
-    { id: 'c3', name: 'Physics Notes', type: 'notes', isPublic: false, items: ['Chapter 1', 'Formulas'] },
-    { id: 'c4', name: 'Math Homework', type: 'assignments', isPublic: false, items: ['Assignment 1', 'Assignment 2'] },
-  ]);
 
 
   // Mock communities the user has joined
@@ -75,20 +56,6 @@ const Page: React.FC = () => {
 
 
 
-
-
-  // Helper function to get icon based on collection type
-  const getCollectionIcon = (type: Collection['type']) => {
-    switch (type) {
-      case 'course': return <GraduationCap className="w-5 h-5 text-indigo-500" />;
-      case 'timetable': return <Calendar className="w-5 h-5 text-green-500" />;
-      case 'notes': return <ClipboardList className="w-5 h-5 text-yellow-500" />;
-      case 'assignments': return <BookOpen className="w-5 h-5 text-red-500" />;
-      default: return <BookOpen className="w-5 h-5 text-gray-500" />;
-    }
-  };
-
-
   useEffect(() => {
     if (session === null) redirect("/")
   }, [session])
@@ -97,7 +64,7 @@ const Page: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
-      <Navbar/>
+      <Navbar />
       <header className="mb-8 text-center py-5">
         <h1 className="text-4xl font-bold text-indigo-700 mb-2">Your Dashboard</h1>
         <p className="text-lg text-gray-600 px-2">Welcome back! Here&apos;s a quick overview of your academic journey.</p>
@@ -115,47 +82,46 @@ const Page: React.FC = () => {
           </div>
           <>
             {collections.length === 0 ? (
-              <div className="text-center py-8">
+              <div className="text-center py-8 w-full min-h-full pb-10 flex flex-col justify-end">
                 <p className="text-gray-500 mb-4">You don&apos;t have any collections yet.</p>
-                <motion.button
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700  transform hover:scale-105"
-                >
-                  <PlusCircle className="w-5 h-5 mr-2" />
-                  Create New Collection
-                </motion.button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {collections.map(collection => (
-                  <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200">
-                    <div className="flex items-center mb-2">
-                      {getCollectionIcon(collection.type)}
-                      <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.name}</h3>
-                      {collection.isPublic ? (
-                        <Globe className="w-4 h-4 ml-auto text-green-600" />
-                      ) : (
-                        <Lock className="w-4 h-4 ml-auto text-gray-500" />
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-600 mb-2 capitalize">Type: {collection.type}</p>
-                    {collection.items && collection.items.length > 0 && (
-                      <p className="text-sm text-gray-500 ">Items: {collection.items.join(', ')}</p>
-                    )}
-                    <motion.button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</motion.button>
-                  </div>
-                ))}
-                <div className="mt-6 text-center">
-                  <motion.button whileTap={{scale: 0.95}} onClick={() => {redirect("/collections")}} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
+                <div className='w-full flex gap-4 justify-around'>
+                  <div className="text-center flex-1/2">
+                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
                     <Eye className="w-5 h-5 mr-2" />
                     View All Collections
                   </motion.button>
                 </div>
-                <div className="mt-6 text-center">
-                  <motion.button whileTap={{scale: 0.95}} onClick={() => {redirect("/collections")}} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
+                <div className="text-center flex-1/2">
+                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
 
                     <PlusCircle className="w-5 h-5 mr-2" />
                     Add New Collection
                   </motion.button>
+                </div>
+                </div>
+              </div>
+            ) : (
+              <div className='w-full min-h-[80%] flex flex-col justify-between gap-5'>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {collections.map((collection, i) => {
+                  if(i > 3) return;
+                  return <Collection key={collection.id}  collection={collection} path={"dashboard"}/>
+                })}
+              </div>
+                <div className='w-full flex gap-4 justify-around'>
+                  <div className="text-center flex-1/2">
+                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
+                    <Eye className="w-5 h-5 mr-2" />
+                    View All Collections
+                  </motion.button>
+                </div>
+                <div className="text-center flex-1/2">
+                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
+
+                    <PlusCircle className="w-5 h-5 mr-2" />
+                    Add New Collection
+                  </motion.button>
+                </div>
                 </div>
               </div>
             )}
@@ -243,7 +209,7 @@ const Page: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
