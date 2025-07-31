@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import {  ArrowLeft, ArrowRight, FilterIcon, SearchIcon, XCircle } from 'lucide-react';
+import {  FilterIcon, Globe,  SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -130,13 +130,25 @@ const CustomDropdown = <T extends string | number>({
 };
 
 
+export interface collectionType {
+    course: string;
+    year: number;
+    subject: string;
+    type: string;
+    title: string;
+    items: string[];
+    created_at: string ; 
+}
+
+
 const App: React.FC = () => {
     // State to hold the currently selected filter values
     const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
     const [selectedYear, setSelectedYear] = useState<string | null>(null);
     const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
     const [showFiltes, setShowFilters] = useState<boolean>(true);
-    const {collectionSearch, setCollectionSearch} = useStateContext() as StateContextType;
+    const { collectionSearch, setCollectionSearch } = useStateContext() as StateContextType;
+    const [collections, setCollections] = useState<collectionType[]>([])
 
     // State to hold the combined filter object
     const [filterObject, setFilterObject] = useState<{
@@ -170,8 +182,33 @@ const App: React.FC = () => {
     const handleRemoveSemester = () => setSelectedSemester(null);
 
     useEffect(() => {
+        const getCollections = async () => {
+            try {
+                // 1. Await the fetch call to get the Response object
+                const response = await fetch("/api/collection", {
+                    method: "POST",
+                    body: JSON.stringify(filterObject)
+                });
 
-    },[collectionSearch, filterObject])
+                if (!response.ok) {
+                    // Handle HTTP errors
+                    const errorData = await response.json();
+                    throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorData.message || 'Unknown error'}`);
+                }
+
+                const data = await response.json();
+
+                setCollections(data.collections)
+
+            } catch (error) {
+                console.error("Failed to fetch collections:", error);
+
+                throw error;
+            }
+        };
+
+        getCollections()
+    }, [collectionSearch, filterObject])
 
     return (
         <div className=''>
@@ -234,7 +271,7 @@ const App: React.FC = () => {
                     <div className='absolute px-2'>
                         <SearchIcon />
                     </div>
-                    <input onChange={(e) => {setCollectionSearch(e.target.value)}} value={collectionSearch} type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
+                    <input onChange={(e) => { setCollectionSearch(e.target.value) }} value={collectionSearch} type='search' className=' bg-white border border-black/10 shadow-lg shadow-gray-200 w-full max-w-xl pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' />
                 </div>
 
             </div>
@@ -271,16 +308,28 @@ const App: React.FC = () => {
                         <p className="text-gray-500">No filters applied.</p>
                     )}
                 </div>
-                <main className='w-full min-h-52'>
-                    
+                <main className='max-w-full flex flex-wrap gap-3 py-5 min-h-52'>
+                    {collections.map(collection => (
+                        <div key={collection.title} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
+                            <div className="flex items-center mb-2">
+                                <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.title}</h3>
+                                    <Globe className="w-4 h-4 ml-auto text-green-600" />
+                            </div>
+                            <p className="text-sm text-gray-600 mb-2 capitalize">Type: {collection.type}</p>
+                            {collection.items && collection.items.length > 0 && (
+                                <p className="text-sm text-gray-500 ">Items: {collection.items.join(', ')}</p>
+                            )}
+                            <motion.button className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</motion.button>
+                        </div>
+                    ))}
                 </main>
-                <div className='w-full flex justify-center items-center gap-2'>
-                    <div className='h-12 w-12 flex justify-center items-center border border-red-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowLeft/></div>
+                {/* <div className='w-full flex justify-center items-center gap-2'>
+                    <div className='h-12 w-12 flex justify-center items-center border border-red-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowLeft /></div>
                     <h1 className='font-semibold'>Page <span>1</span> of <span>1</span></h1>
-                    <div className='h-12 w-12 flex justify-center items-center border border-green-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowRight/></div>
-                </div>
+                    <div className='h-12 w-12 flex justify-center items-center border border-green-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowRight /></div>
+                </div> */}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

@@ -9,7 +9,7 @@ const CollectionSchema = new Schema({
     subject : String,
     type : String,
     title : String,
-    items : Array,
+    items : [String],
     created_at: Date,
     id : String
 })
