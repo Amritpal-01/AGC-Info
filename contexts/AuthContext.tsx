@@ -20,8 +20,9 @@ import { collectionType } from "@/app/collections/page";
 // 1. Define your context value type (you can extend this later)
 export interface AuthContextType {
   session: Session | null,
-  userData: UserDataType | null
-  collections: collectionType[]
+  userData: UserDataType | null,
+  collections: collectionType[] | null,
+  setUserCollections: (panel: collectionType[]) => void
 }
 
 // 2. Create context with proper type
@@ -36,7 +37,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { data: session } = useSession()
   const [userData, setUserData] = useState<UserDataType | null>(null);
-  const [collections, setCollections] = useState<collectionType[]>([]);
+  const [collections, setUserCollections] = useState<collectionType[] | null>(null);
 
   const pathname = usePathname();
 
@@ -48,7 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const profile = await responce.json();
 
-    setCollections(profile.userData.collections)
+    setUserCollections(profile.userData.collections)
     setUserData(profile.userData);
   }
 
@@ -68,7 +69,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   if (!session && pathname !== "/") return <></>
 
   return (
-    <AuthContext.Provider value={{ session, userData, collections }}>
+    <AuthContext.Provider value={{ session, userData, collections, setUserCollections }}>
       {children}
     </AuthContext.Provider>
   );

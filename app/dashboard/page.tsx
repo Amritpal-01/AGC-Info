@@ -3,7 +3,7 @@
 import Navbar from '@/components/Navbar'
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
 import { redirect } from 'next/navigation'
-import React, { useEffect, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import {
   BookOpen,
   Users,
@@ -11,7 +11,8 @@ import {
   PlusCircle,
   HelpCircle,
   Search,
-  Eye
+  Eye,
+  LockIcon
 } from 'lucide-react'; // Importing icons from lucide-react
 import Footer from '@/components/Footer'
 import { motion } from 'motion/react'
@@ -36,8 +37,7 @@ interface Question {
 
 const Page: React.FC = () => {
   const { session, collections } = useAuth() as AuthContextType
-
-  // State for mock collections (initially empty to show 'create collection' option)
+  const [viewAllCollectionsToggle, setViewAllCollectionsToggle] = useState<boolean>(false)
 
 
   // Mock communities the user has joined
@@ -81,47 +81,51 @@ const Page: React.FC = () => {
             </h2>
           </div>
           <>
-            {collections.length === 0 ? (
+            {!collections && <div className='w-full h-[70%] flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
+            {collections?.length === 0 ? (
               <div className="text-center py-8 w-full min-h-full pb-10 flex flex-col justify-end">
+                <div className='flex-1 flex justify-center items-center'>
+                  <LockIcon className='w-20 h-20 text-gray-300'/>
+                </div>
                 <p className="text-gray-500 mb-4">You don&apos;t have any collections yet.</p>
                 <div className='w-full flex flex-col gap-4 justify-around'>
                   <div className="text-center flex-1/2">
-                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
-                    <Eye className="w-5 h-5 mr-2" />
-                    View All Collections
-                  </motion.button>
-                </div>
-                <div className="text-center flex-1/2">
-                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
+                      <Eye className="w-5 h-5 mr-2" />
+                      View All Collections
+                    </motion.button>
+                  </div>
+                  <div className="text-center flex-1/2">
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
 
-                    <PlusCircle className="w-5 h-5 mr-2" />
-                    Add New Collection
-                  </motion.button>
-                </div>
+                      <PlusCircle className="w-5 h-5 mr-2" />
+                      Add New Collection
+                    </motion.button>
+                  </div>
                 </div>
               </div>
             ) : (
               <div className='w-full min-h-[80%] flex flex-col justify-between gap-5'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {collections.map((collection, i) => {
-                  if(i > 3) return;
-                  return <Collection key={collection.id}  collection={collection} path={"dashboard"}/>
-                })}
-              </div>
+                  {collections?.map((collection, i) => {
+                    if (i > 3 && !viewAllCollectionsToggle) return;
+                    return <Collection key={collection.id} collection={collection} path={"dashboard"} />
+                  })}
+                </div>
                 <div className='w-full flex flex-col gap-4 justify-around'>
+                  {(collections && collections.length > 4) && <div className="text-center flex-1/2">
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { setViewAllCollectionsToggle(!viewAllCollectionsToggle) }} className={`inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full ${viewAllCollectionsToggle? "text-green-600 bg-green-100 hover:bg-green-200":"text-red-600 bg-red-100 hover:bg-red-200"} `}>
+                      <Eye className="w-5 h-5 mr-2" />
+                      {viewAllCollectionsToggle?"View less":"View All Collections"}
+                    </motion.button>
+                  </div>}
                   <div className="text-center flex-1/2">
-                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
-                    <Eye className="w-5 h-5 mr-2" />
-                    View All Collections
-                  </motion.button>
-                </div>
-                <div className="text-center flex-1/2">
-                  <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
 
-                    <PlusCircle className="w-5 h-5 mr-2" />
-                    Add New Collection
-                  </motion.button>
-                </div>
+                      <PlusCircle className="w-5 h-5 mr-2" />
+                      Add New Collection
+                    </motion.button>
+                  </div>
                 </div>
               </div>
             )}

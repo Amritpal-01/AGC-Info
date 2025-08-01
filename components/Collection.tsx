@@ -11,7 +11,7 @@ interface CollectionPropsType {
 }
 
 const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
-    const { session } = useAuth() as AuthContextType
+    const { session, setUserCollections, collections } = useAuth() as AuthContextType
     const [isAdded, setIsAdded] = useState(false)
 
     const addCollection = async () => {
@@ -23,7 +23,15 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
 
         const data = await responce.json();
 
-        if (data.status = 200) setIsAdded(true);
+
+        if (data.status === 200) {
+            setIsAdded(true)
+            if (collections) {
+                setUserCollections([...collections, collection])
+            } else {
+                setUserCollections([collection])
+            }
+        };
     }
 
     return (

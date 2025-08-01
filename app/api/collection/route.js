@@ -96,7 +96,7 @@ export async function PUT(request) {
 
     if (alreadyExist) {
       return NextResponse.json(
-        { message: "not added" },
+        { status: 200, message: "not added" },
         { status: 200 }
       );
     }
@@ -106,7 +106,7 @@ export async function PUT(request) {
     await userProfile.save();
 
     return NextResponse.json(
-      { message: "Collection added to user profile successfully" },
+      { status: 200, message: "Collection added to user profile successfully" },
       { status: 200 }
     );
   } catch (error) {
