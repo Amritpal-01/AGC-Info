@@ -1,9 +1,15 @@
+"use client"
+
+import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 import React from 'react'
 
 const Page : React.FC = () => {
   return (
-    <div className='p-4'>
-      sorry!!! this page is under construction
+    <div>
+      <Navbar/>
+      <main className='min-h-dvh'></main>
+      <Footer/>
     </div>
   )
 }
