@@ -34,6 +34,32 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
         };
     }
 
+    const removeCollection = async () => {
+        const responce = await fetch("/api/collection", {
+            method: "DELETE",
+            body: JSON.stringify({ collectionId: collection.id, userId: session?.user.id })
+        })
+
+        const data = await responce.json();
+
+
+        if (data.status === 200) {
+            if (collections) {
+                const newCollection: collectionType[] = [];
+
+                collections?.map((col) => {
+                    if (col.id !== collection.id) {
+                        newCollection.push(col);
+                    }
+                })
+
+                setUserCollections(newCollection)
+            } else {
+                setUserCollections([])
+            }
+        };
+    }
+
     return (
         <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
             <div className="flex items-center mb-2">
@@ -42,7 +68,7 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
                     {!isAdded ? <PlusIcon className="w-5 h-5 text-green-600" /> : <PinIcon className="w-5 h-5 text-green-600" />}
                 </motion.button>}
 
-                {(path === "dashboard") && <motion.button whileTap={{ scale: 0.95 }} className='h-8 w-8 ml-auto hover:bg-red-100 border hover:border-red-300 border-white/10  rounded-full flex justify-center items-center'>
+                {(path === "dashboard") && <motion.button whileTap={{ scale: 0.95 }} onClick={removeCollection} className='h-8 w-8 ml-auto hover:bg-red-100 border hover:border-red-300 border-white/10  rounded-full flex justify-center items-center'>
                     <UnplugIcon className="w-5 h-5 text-red-600" />
                 </motion.button>}
             </div>

@@ -49,6 +49,7 @@ export async function POST(request) {
     }
 
     console.error("Operation failed:", error);
+
     return NextResponse.json(
       { status: 500, message: `Internal Server Error: ${errorMessage}` },
       { status: 500 }
@@ -111,6 +112,65 @@ export async function PUT(request) {
     );
   } catch (error) {
     console.error("Error in PUT request:", error);
+    let errorMessage = "Internal Server Error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return NextResponse.json({ message: errorMessage }, { status: 500 });
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    // Connect to the database
+    await connectDB();
+
+    // Get the collectionId and userId from the request body
+    const body = await request.json();
+    const { collectionId, userId } = body;
+
+    // Validate that both collectionId and userId are provided
+    if (!collectionId || !userId) {
+      return NextResponse.json(
+        { message: "Both collectionId and userId are required" },
+        { status: 400 }
+      );
+    }
+
+    // Find the user's profile
+    const userProfile = await Profile.findOne({ id: userId });
+
+    // Handle the case where the user profile is not found
+    if (!userProfile) {
+      return NextResponse.json(
+        { message: "User profile not found" },
+        { status: 404 }
+      );
+    }
+
+    // Filter out the collection with the matching ID
+    const initialCollectionsCount = userProfile.collections.length;
+    userProfile.collections = userProfile.collections.filter(
+      (collection) => collection.id !== collectionId
+    );
+    
+    // Check if a collection was actually removed
+    if (userProfile.collections.length === initialCollectionsCount) {
+        return NextResponse.json(
+          { status: 200, message: "Collection was not found in the user's profile" },
+          { status: 200 }
+        );
+    }
+
+    // Save the updated user profile
+    await userProfile.save();
+
+    return NextResponse.json(
+      { status: 200, message: "Collection removed from user profile successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error in DELETE request:", error);
     let errorMessage = "Internal Server Error";
     if (error instanceof Error) {
       errorMessage = error.message;

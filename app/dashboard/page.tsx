@@ -84,10 +84,10 @@ const Page: React.FC = () => {
             {!collections && <div className='w-full h-[70%] flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
             {collections?.length === 0 ? (
               <div className="text-center py-8 w-full min-h-full pb-10 flex flex-col justify-end">
-                <div className='flex-1 flex justify-center items-center'>
+                <div className='flex-1 flex flex-col justify-center items-center'>
                   <LockIcon className='w-20 h-20 text-gray-300'/>
+                <p className="text-gray-300 max-[600px]:text-md mb-4 font-bold text-lg">You don&apos;t own any collections yet.</p>
                 </div>
-                <p className="text-gray-500 mb-4">You don&apos;t have any collections yet.</p>
                 <div className='w-full flex flex-col gap-4 justify-around'>
                   <div className="text-center flex-1/2">
                     <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
