@@ -316,6 +316,7 @@ const App: React.FC = () => {
                         <p className="text-gray-500">No filters applied.</p>
                     )}
                 </div>
+                <div className='text-red-600'><b>Disclamer : </b>All this data is AI generated for testing purposes</div>
                 <main className='max-w-full flex flex-wrap items-start gap-3 py-5 min-h-dvh'>
                     {(isLoading && collections.length === 0) && <div className='w-full flex justify-center'>
                         <span className="spinner w-10 aspect-square absolute" />
