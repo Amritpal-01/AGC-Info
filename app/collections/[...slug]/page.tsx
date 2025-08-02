@@ -93,7 +93,7 @@ const Page = () => {
               {blog.description}
             </p>
 
-            <div className='text-red-600'><b>Disclamer : </b>All this data is AI generated for testing purposes</div>
+            <div className='text-red-600'><b>Disclaimer : </b>All this data is AI generated for testing purposes</div>
           </div>
 
           {/* Thumbnail Image - Conditionally rendered */}
