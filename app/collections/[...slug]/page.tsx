@@ -4,6 +4,7 @@ import { Link, MoveLeft, NotepadTextDashed, Video } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { redirect, useParams } from 'next/navigation'; // Import useParams
 import Disclaimer from '@/components/Disclaimer';
+import SlugPageLoading from '@/loadings/SlugPageLoading';
 
 export interface IHyperlink {
   title: string;
@@ -74,7 +75,7 @@ const Page = () => {
     </div>
   );
 
-  if (!blog) return <div className='min-h-dvh'></div>;
+  if(!blog) return <SlugPageLoading/>;
 
   return (
       <main className='min-h-dvh flex flex-col items-center py-8'>
