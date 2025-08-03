@@ -78,7 +78,7 @@ const Page: React.FC = () => {
             </h2>
           </div>
 
-          <div className='w-full h-[90%]'>
+          <div className='w-full min-h-[85%]'>
             {!collections && <div className='w-full h-full flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
             {collections?.length === 0 ? (
               <div className="text-center w-full min-h-full flex flex-col justify-end">
