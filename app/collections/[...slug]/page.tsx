@@ -3,6 +3,7 @@
 import { Link, MoveLeft, NotepadTextDashed, Video } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { redirect, useParams } from 'next/navigation'; // Import useParams
+import Disclaimer from '@/components/Disclaimer';
 
 export interface IHyperlink {
   title: string;
@@ -89,7 +90,7 @@ const Page = () => {
               {blog.description}
             </p>
 
-            <div className='text-red-600'><b>Disclamer : </b>All this data is AI generated for testing purposes</div>
+            <Disclaimer/>
           </div>
 
           {/* Thumbnail Image - Conditionally rendered */}

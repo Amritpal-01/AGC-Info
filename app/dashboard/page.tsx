@@ -77,10 +77,11 @@ const Page: React.FC = () => {
               Collections
             </h2>
           </div>
-          <>
-            {!collections && <div className='w-full h-[70%] flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
+
+          <div className='w-full h-[90%]'>
+            {!collections && <div className='w-full h-full flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
             {collections?.length === 0 ? (
-              <div className="text-center py-8 w-full min-h-full pb-10 flex flex-col justify-end">
+              <div className="text-center w-full min-h-full flex flex-col justify-end">
                 <div className='flex-1 flex flex-col justify-center items-center'>
                   <LockIcon className='w-20 h-20 text-gray-300'/>
                 <p className="text-gray-300 max-[600px]:text-md mb-4 font-bold text-lg">You don&apos;t own any collections yet.</p>
@@ -102,7 +103,7 @@ const Page: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className='w-full min-h-[80%] flex flex-col justify-between gap-5'>
+              <div className='w-full min-h-full flex flex-col justify-between gap-5'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {collections?.map((collection, i) => {
                     if (i > 3 && !viewAllCollectionsToggle) return;
@@ -129,7 +130,7 @@ const Page: React.FC = () => {
 
 
 
-          </>
+          </div>
         </section>
 
         {/* Communities Section */}
