@@ -14,6 +14,7 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
     const { session, setUserCollections, collections } = useAuth() as AuthContextType
     const [isAdded, setIsAdded] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
     const addCollection = async () => {
         setIsLoading(true)
@@ -70,13 +71,13 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
         <div key={collection.id} className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 max-[500px]:w-full min-w-[30%]">
             <div className="flex items-center mb-2">
                 <h3 className="text-lg font-medium text-gray-800 ml-2">{collection.title}</h3>
-                {(path !== "dashboard") && <motion.button whileTap={{ scale: 0.95 }} onClick={() => { 
-                    if(isAdded){
+                {(path !== "dashboard") && <motion.button whileTap={{ scale: 0.95 }} onClick={() => {
+                    if (isAdded) {
                         removeCollection()
-                    }else{
+                    } else {
                         addCollection()
                     }
-                }} className={`h-8 w-8 ml-auto ${isAdded?"hover:bg-red-100 border hover:border-red-300":"hover:bg-green-100 border hover:border-green-300"} border-white/10  rounded-full flex justify-center items-center`}>
+                }} className={`h-8 w-8 ml-auto ${isAdded ? "hover:bg-red-100 border hover:border-red-300" : "hover:bg-green-100 border hover:border-green-300"} border-white/10  rounded-full flex justify-center items-center`}>
                     {!isAdded ? <PinIcon className="w-5 h-5 text-green-600" /> : <PinOff className="w-5 h-5 text-red-600" />}
                 </motion.button>}
 
@@ -88,7 +89,13 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
             {collection.items && collection.items.length > 0 && (
                 <p className="text-sm text-gray-500 ">Items: {collection.items.join(', ')}</p>
             )}
-            <motion.button onClick={() => redirect(`/collections/${collection.id}`)} className="mt-3 text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details &rarr;</motion.button>
+            <div className='flex flex-row w-full justify-between items-center mt-3'>
+                <motion.button onClick={() => {
+                    setIsRedirecting(true)
+                    redirect(`/collections/${collection.id}`)
+                }} className=" text-indigo-600 hover:text-indigo-800 text-sm font-medium cursor-pointer min-w-20">View Details </motion.button>
+                {isRedirecting && <span className="spinner w-4 aspect-square" />}
+            </div>
         </div>
     )
 }
