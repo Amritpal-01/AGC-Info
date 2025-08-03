@@ -93,7 +93,7 @@ const Collection: React.FC<CollectionPropsType> = ({ collection, path }) => {
                 <motion.button onClick={() => {
                     setIsRedirecting(true)
                     redirect(`/collections/${collection.id}`)
-                }} className=" text-indigo-600 hover:text-indigo-800 text-sm font-medium cursor-pointer min-w-20">View Details </motion.button>
+                }} className=" text-indigo-600 hover:text-indigo-800 text-sm font-medium cursor-pointer min-w-20">View Details &rarr;</motion.button>
                 {isRedirecting && <span className="spinner w-4 aspect-square" />}
             </div>
         </div>
