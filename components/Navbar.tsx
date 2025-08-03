@@ -1,5 +1,7 @@
+"use client"
+
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
-import { DraftingCompassIcon, InfoIcon, LogOutIcon, MenuIcon, SearchIcon } from 'lucide-react'
+import { DraftingCompassIcon, InfoIcon, LogOutIcon, MenuIcon, SearchIcon, UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from 'motion/react'
@@ -20,6 +22,8 @@ const Navbar: React.FC = () => {
     }
   };
 
+  if(pathname === "/") return;
+
   return (
     <div className='w-full flex justify-between p-4'>
       <div className='flex gap-2 items-center relative'>
@@ -35,7 +39,14 @@ const Navbar: React.FC = () => {
         </div>
         <h1 className='sm:text-lg text-md font-semibold max-[600px]:flex max-[750px]:hidden'>{session?.user?.name}</h1>
 
-        <div className={`${showProfileOptions ? "w-44 p-2 border border-black/10" : "w-0 p-0"} transition-all duration-300  overflow-hidden bg-white shadow-lg shadow-gray-300 rounded-xl absolute -bottom-16 left-0 text-white`}>
+        <div className={`${showProfileOptions ? "w-44 p-2 border border-black/10" : "w-0 p-0"} transition-all duration-300 flex flex-col gap-2 overflow-hidden bg-white shadow-lg shadow-gray-300 rounded-xl absolute top-16 left-0 text-white`}>
+          <motion.button
+            className='flex gap-2 text-gray-400 w-40 h-8 overflow-hidden hover:bg-gray-100 p-1 rounded-lg'
+            whileTap={{ scale: 0.95 }}
+          >
+            <UserIcon/>
+            <h3 className=''>Profile</h3>
+          </motion.button>
           <motion.button
             className='flex gap-2 text-red-400 w-40 h-8 overflow-hidden hover:bg-red-100 p-1 rounded-lg'
             whileTap={{ scale: 0.95 }}
@@ -49,14 +60,14 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className='flex gap-3 relative items-center min-w-10 min-h-10'>
-        {pathname === "/dashboard" && <><div className='absolute px-2 max-[600px]:hidden'>
-          <SearchIcon />
-        </div>
-          <input  onChange={(e) => {setCollectionSearch(e.target.value)}} value={collectionSearch} onKeyDown={handleKeyDown} type='search' onSubmit={() => { redirect("/collections") }} className=' max-[600px]:hidden bg-blue-100 border border-black/10 shadow-lg shadow-gray-200 w-96 pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' /></>}
-        {pathname === "/dashboard" && <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className={`min-[600px]:hidden text-blue-700 bg-blue-100 border border-blue-300 w-10 h-10 rounded-xl flex items-center justify-center`}><SearchIcon /></motion.button>}
-        {pathname !== "/dashboard" && <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/dashboard") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><DraftingCompassIcon /></motion.button>}
-        <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><InfoIcon /></motion.button>
-        <motion.button whileTap={{ scale: 0.95 }} className={`text-black-700 bg-black-100 border border-black-300 w-10 h-10 rounded-xl flex items-center justify-center`}><MenuIcon /></motion.button>
+        {pathname === "/dashboard" && <><motion.button initial={{scale: 0}} animate={{scale:1}} onClick={() => {redirect("/collections")}} className='absolute px-2 max-[600px]:hidden'>
+          <SearchIcon className='text-blue-700'/>
+        </motion.button>
+          <motion.input  initial={{scale: 0}} animate={{scale:1}}  onChange={(e) => {setCollectionSearch(e.target.value)}} value={collectionSearch} onKeyDown={handleKeyDown} type='search' onSubmit={() => { redirect("/collections") }} className=' max-[600px]:hidden bg-blue-100 border border-black/10 shadow-lg shadow-gray-200 w-96 pl-10 pr-2 py-2 rounded-xl' placeholder='Browse Collections' /></>}
+        {pathname === "/dashboard" && <motion.button initial={{scale: 0}} animate={{scale:1}} whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className={`min-[600px]:hidden text-blue-700 bg-blue-100 border border-blue-300 w-10 h-10 rounded-xl flex items-center justify-center`}><SearchIcon /></motion.button>}
+        {pathname !== "/dashboard" && <motion.button initial={{scale: 0}} animate={{scale:1}} whileTap={{ scale: 0.95 }} onClick={() => { redirect("/dashboard") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><DraftingCompassIcon /></motion.button>}
+        <motion.button initial={{scale: 0}} animate={{scale:1}} whileTap={{ scale: 0.95 }} onClick={() => { redirect("/") }} className={`text-green-700 bg-green-100 border border-green-300 w-10 h-10 rounded-xl flex items-center justify-center`}><InfoIcon /></motion.button>
+        <motion.button initial={{scale: 0}} animate={{scale:1}} whileTap={{ scale: 0.95 }} className={`text-black-700 bg-black-100 border border-black-300 w-10 h-10 rounded-xl flex items-center justify-center`}><MenuIcon /></motion.button>
       </div>
     </div>
   )

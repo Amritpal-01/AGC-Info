@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FilterIcon,  SearchIcon, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { StateContextType, useStateContext } from '@/contexts/StateContext';
 import Collection from '@/components/Collection';
 
@@ -219,7 +217,6 @@ const App: React.FC = () => {
 
     return (
         <div className=''>
-            <Navbar />
             <div className='px-4 sm:px-6 md:px-10 py-5 w-full flex flex-col md:flex-row gap-3'>
                 {/* Filter button with motion animation */}
                 <motion.button
@@ -331,7 +328,6 @@ const App: React.FC = () => {
                     <div className='h-12 w-12 flex justify-center items-center border border-green-300 bg-black/10 rounded-xl hover:bg-black/30'><ArrowRight /></div>
                 </div> */}
             </div>
-            <Footer />
         </div>
     )
 }

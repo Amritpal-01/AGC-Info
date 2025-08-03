@@ -1,7 +1,5 @@
 "use client"
 
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import { Link, MoveLeft, NotepadTextDashed, Video } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { redirect, useParams } from 'next/navigation'; // Import useParams
@@ -75,11 +73,9 @@ const Page = () => {
     </div>
   );
 
-  if (!blog) return;
+  if (!blog) return <div className='min-h-dvh'></div>;
 
   return (
-    <div>
-      <Navbar />
       <main className='min-h-dvh flex flex-col items-center py-8'>
         <div className='w-full max-w-6xl p-4 md:p-8 flex flex-col gap-8 '>
 
@@ -149,8 +145,6 @@ const Page = () => {
 
         </div>
       </main>
-      <Footer />
-    </div>
   )
 }
 

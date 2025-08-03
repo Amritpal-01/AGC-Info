@@ -1,6 +1,5 @@
 "use client"
 
-import Navbar from '@/components/Navbar'
 import { AuthContextType, useAuth } from '@/contexts/AuthContext'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState, } from 'react'
@@ -14,7 +13,6 @@ import {
   Eye,
   LockIcon
 } from 'lucide-react'; // Importing icons from lucide-react
-import Footer from '@/components/Footer'
 import { motion } from 'motion/react'
 import Collection from '@/components/Collection'
 
@@ -64,7 +62,6 @@ const Page: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
-      <Navbar />
       <header className="mb-8 text-center py-5">
         <h1 className="text-4xl font-bold text-indigo-700 mb-2">Your Dashboard</h1>
         <p className="text-lg text-gray-600 px-2">Welcome back! Here&apos;s a quick overview of your academic journey.</p>
@@ -213,7 +210,6 @@ const Page: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

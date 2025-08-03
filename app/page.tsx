@@ -5,7 +5,6 @@ import Google from "@/icon/Google";
 import Arrow from "@/icon/Arrow";
 import { motion } from "motion/react"
 import {  useState } from "react";
-import Footer from "@/components/Footer";
 import { AuthContextType, useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
 import {  CrownIcon, EyeIcon, FastForward, MessageCircleMore, PenIcon } from "lucide-react";
@@ -173,11 +172,6 @@ export default function Home() {
       </section>
 
       <div className="p-5" />
-
-      <div className="w-dvw">
-        <Footer />
-      </div>
-
 
     </div>
   );
