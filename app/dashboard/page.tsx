@@ -78,7 +78,7 @@ const Page: React.FC = () => {
             </h2>
           </div>
 
-          <div className='w-full min-h-[85%]'>
+          <div className='w-full min-h-[85%] flex flex-col'>
             {!collections && <div className='w-full h-full flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
             {collections?.length === 0 ? (
               <div className="text-center w-full min-h-full flex flex-col justify-end">
@@ -103,7 +103,7 @@ const Page: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className='w-full min-h-full flex flex-col justify-between gap-5'>
+              <div className='w-full flex-1 flex flex-col justify-between gap-5'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {collections?.map((collection, i) => {
                     if (i > 3 && !viewAllCollectionsToggle) return;
@@ -153,9 +153,9 @@ const Page: React.FC = () => {
                     </div>
                     <div className="ml-3 flex-grow">
                       <p className="font-medium text-gray-800">{community.name}</p>
-                      <p className="text-sm text-gray-500 w-44">{community.topic} &bull; {community.members.toLocaleString()} members</p>
+                      <p className="text-sm text-gray-500">{community.topic} &bull; {community.members.toLocaleString()} members</p>
                     </div>
-                    <motion.button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Join Chat &rarr;</motion.button>
+                    <motion.button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium min-w-20">Join Chat &rarr;</motion.button>
                   </li>
                 ))}
               </ul>
