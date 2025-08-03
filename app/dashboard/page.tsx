@@ -70,7 +70,7 @@ const Page: React.FC = () => {
       <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Collections Section */}
-        <section className="bg-white rounded-xl shadow-lg p-6 lg:col-span-2">
+        <section className="bg-white rounded-xl shadow-lg p-6 pb-16 lg:col-span-2">
           <div className="flex justify-between items-center mb-4 cursor-pointer">
             <h2 className="text-2xl font-semibold text-indigo-600 flex items-center">
               <BookOpen className="w-7 h-7 mr-3 text-indigo-500" />
@@ -78,8 +78,9 @@ const Page: React.FC = () => {
             </h2>
           </div>
 
-          <div className='w-full min-h-[85%] flex flex-col'>
+          <div className='w-full min-h-full flex flex-col'>
             {!collections && <div className='w-full h-full flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
+
             {collections?.length === 0 ? (
               <div className="text-center w-full min-h-full flex flex-col justify-end">
                 <div className='flex-1 flex flex-col justify-center items-center'>
@@ -127,8 +128,6 @@ const Page: React.FC = () => {
                 </div>
               </div>
             )}
-
-
 
           </div>
         </section>
