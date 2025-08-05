@@ -11,7 +11,8 @@ import {
   HelpCircle,
   Search,
   Eye,
-  LockIcon
+  LockIcon,
+  AlertTriangle
 } from 'lucide-react'; // Importing icons from lucide-react
 import { motion } from 'motion/react'
 import Collection from '@/components/Collection'
@@ -78,23 +79,22 @@ const Page: React.FC = () => {
             </h2>
           </div>
 
-          <div className='w-full min-h-full flex flex-col'>
-            {!collections && <div className='w-full h-full flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
+          <div className='w-full h-full flex flex-col'>
+            {!collections && <div className='w-full h-full flex-1 flex justify-center items-center'><span className="spinner w-7 aspect-square" /></div>}
 
             {collections?.length === 0 ? (
-              <div className="text-center w-full min-h-full flex flex-col justify-end">
+              <div className="text-center w-full flex-1 flex flex-col justify-end">
                 <div className='flex-1 flex flex-col justify-center items-center'>
-                  <LockIcon className='w-20 h-20 text-gray-300'/>
-                <p className="text-gray-300 max-[600px]:text-md mb-4 font-bold text-lg">You don&apos;t own any collections yet.</p>
+                  <h1 className='text-red-600 flex flex-col items-center gap-2'><AlertTriangle className='opacity-50 w-20 h-20'/> You dont have any collections!!</h1>
                 </div>
                 <div className='w-full flex flex-col gap-4 justify-around'>
-                  <div className="text-center flex-1/2">
+                  <div className="text-center">
                     <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-red-600 bg-red-100 hover:bg-red-200 ">
                       <Eye className="w-5 h-5 mr-2" />
                       View All Collections
                     </motion.button>
                   </div>
-                  <div className="text-center flex-1/2">
+                  <div className="text-center">
                     <motion.button whileTap={{ scale: 0.95 }} onClick={() => { redirect("/collections") }} className="inline-flex w-full items-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 ">
 
                       <PlusCircle className="w-5 h-5 mr-2" />
@@ -104,7 +104,7 @@ const Page: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className='w-full flex-1 flex flex-col justify-between gap-5'>
+              <div className='w-full flex-1 flex flex-col justify-between gap-4'>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {collections?.map((collection, i) => {
                     if (i > 3 && !viewAllCollectionsToggle) return;
@@ -154,7 +154,7 @@ const Page: React.FC = () => {
                       <p className="font-medium text-gray-800">{community.name}</p>
                       <p className="text-sm text-gray-500">{community.topic} &bull; {community.members.toLocaleString()} members</p>
                     </div>
-                    <motion.button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium min-w-20">Join Chat &rarr;</motion.button>
+                    <motion.button onClick={() => {redirect("/communities/xyz")}} className="text-indigo-600 hover:text-indigo-800 text-sm font-medium min-w-20">Join Chat &rarr;</motion.button>
                   </li>
                 ))}
               </ul>

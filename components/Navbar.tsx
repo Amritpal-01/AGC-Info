@@ -23,7 +23,18 @@ const Navbar: React.FC = () => {
     }
   };
 
-  if(pathname === "/") return;
+  const varifyPath = (arr: string) => {
+    if(arr === "/") return true;
+    const commPath = '/communities';
+    const newArr = arr.slice(0,12);
+
+    if(newArr == commPath) return true;
+
+    return false;
+  }
+  
+
+  if(varifyPath(pathname)) return;
 
   return (
     <div className='w-full flex justify-between p-4'>

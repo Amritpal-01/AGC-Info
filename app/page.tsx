@@ -4,16 +4,16 @@ import { signIn } from "next-auth/react";
 import Google from "@/icon/Google";
 import Arrow from "@/icon/Arrow";
 import { motion } from "motion/react"
-import {  useState } from "react";
+import { useState } from "react";
 import { AuthContextType, useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
-import {  CrownIcon, EyeIcon, FastForward, MessageCircleMore, PenIcon } from "lucide-react";
+import { CrownIcon, EyeIcon, FastForward, MessageCircleMore, PenIcon } from "lucide-react";
 
 export default function Home() {
-  const {session} = useAuth() as AuthContextType
+  const { session } = useAuth() as AuthContextType
   const [isSigning, setIsSigning] = useState<boolean>(false)
 
- 
+
 
   return (
     <div className=" min-h-dvh flex flex-col items-center overflow-hidden">
@@ -24,6 +24,9 @@ export default function Home() {
         {/* You can add navigation links or user profile here if needed */}
       </header>
 
+
+      <div className='text-red-600 px-4'><b>Disclaimer : </b>The services are still under development and opened for testing purposes only.</div>
+
       {/* Welcome Section */}
       <section className="w-full max-w-4xl text-black p-8 mb-8 text-center relative overflow-hidden">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
@@ -33,57 +36,57 @@ export default function Home() {
           Find the best services and connect instantly
         </p>
 
-        { !session && <motion.button
-        onClick={async () => {
-          setIsSigning(true)
-          await signIn("google")
-          setTimeout(() => {
-            setIsSigning(false)
-          }, 500)
-        }}
-        whileTap={{ scale: 0.95 }}
-        disabled={isSigning}
-        className="py-5"
+        {!session && <motion.button
+          onClick={async () => {
+            setIsSigning(true)
+            await signIn("google")
+            setTimeout(() => {
+              setIsSigning(false)
+            }, 500)
+          }}
+          whileTap={{ scale: 0.95 }}
+          disabled={isSigning}
+          className="py-5"
         >
-        <div className="flex items-center justify-center w-48 px-4 h-14 rounded-2xl cursor-pointer bg-[#ffffff] border border-black/20 overflow-hidden relative">
-          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
+          <div className="flex items-center justify-center w-48 px-4 h-14 rounded-2xl cursor-pointer bg-[#ffffff] border border-black/20 overflow-hidden relative">
+            <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
                 ${isSigning ? "opacity-0" : "opacity-100"}
               `}>
-            <Google />
-            <h1 className="text-lg text-black">Get Started</h1>
-            <Arrow />
+              <Google />
+              <h1 className="text-lg text-black">Get Started</h1>
+              <Arrow />
+            </div>
+            {isSigning && <span className="spinner w-8 aspect-square absolute" />}
           </div>
-          {isSigning && <span className="spinner w-8 aspect-square absolute" />}
-        </div>
-      </motion.button>}
+        </motion.button>}
 
-       {session && <motion.button
-        onClick={async () => {
-          setIsSigning(true)
-          redirect("/dashboard")
-          setTimeout(() => {
-            setIsSigning(false)
-          }, 500)
-        }}
-        whileTap={{ scale: 0.95 }}
-        disabled={isSigning}
-        className="py-5"
+        {session && <motion.button
+          onClick={async () => {
+            setIsSigning(true)
+            redirect("/dashboard")
+            setTimeout(() => {
+              setIsSigning(false)
+            }, 500)
+          }}
+          whileTap={{ scale: 0.95 }}
+          disabled={isSigning}
+          className="py-5"
         >
-        <div className="flex items-center justify-center w-64 px-4 h-14 rounded-2xl cursor-pointer text-blue-500 bg-[#ffffff] border border-black/20 overflow-hidden relative">
-          <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
+          <div className="flex items-center justify-center w-64 px-4 h-14 rounded-2xl cursor-pointer text-blue-500 bg-[#ffffff] border border-black/20 overflow-hidden relative">
+            <div className={`w-full flex items-center justify-around overflow-hidden transition-all duration-100
                 ${isSigning ? "opacity-0" : "opacity-100"}
               `}>
-            <EyeIcon/>
-            <h1 className="text-lg text-black">Go to Dashboard</h1>
-            <Arrow />
+              <EyeIcon />
+              <h1 className="text-lg text-black">Go to Dashboard</h1>
+              <Arrow />
+            </div>
+            {isSigning && <span className="spinner w-8 aspect-square absolute" />}
           </div>
-          {isSigning && <span className="spinner w-8 aspect-square absolute" />}
-        </div>
-      </motion.button>}
+        </motion.button>}
 
       </section>
 
-      
+
 
       {/* Offerings Section */}
       <section className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
@@ -92,7 +95,7 @@ export default function Home() {
           {/* Q&A Platform */}
           <div className="flex items-start p-4 bg-blue-50 rounded-lg shadow-sm ">
             <div className="w-8 h-8 text-blue-600 mr-4 flex-shrink-0">
-              <CrownIcon/>
+              <CrownIcon />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Q&A Platform</h3>
@@ -105,7 +108,7 @@ export default function Home() {
           {/* Quick Access */}
           <div className="flex items-start p-4 bg-green-50 rounded-lg shadow-sm">
             <div className="w-8 h-8 text-green-600 mr-4 flex-shrink-0">
-              <FastForward/>
+              <FastForward />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Quick Access</h3>
@@ -118,7 +121,7 @@ export default function Home() {
           {/* Attendance Monitor */}
           <div className="flex items-start p-4 bg-purple-50 rounded-lg shadow-sm">
             <div className="w-8 h-8 text-purple-600 mr-4 flex-shrink-0">
-              <PenIcon/>
+              <PenIcon />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Attendance Monitor</h3>
@@ -131,7 +134,7 @@ export default function Home() {
           {/* Global Chats */}
           <div className="flex items-start p-4 bg-red-50 rounded-lg shadow-sm">
             <div className="w-8 h-8 text-red-600 mr-4 flex-shrink-0">
-              <MessageCircleMore/>
+              <MessageCircleMore />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Global Chats</h3>
@@ -155,7 +158,7 @@ export default function Home() {
             <p className="text-gray-800 text-lg font-medium">
               Have an idea or need something extra? We&apos;re always ready to add new features on demand, just let us know what you need!
             </p>
-            <div className="flex-1"/>
+            <div className="flex-1" />
           </div>
 
           {/* Weekly Votes Card */}
@@ -166,7 +169,7 @@ export default function Home() {
             <p className="text-gray-800 text-lg font-medium">
               We consistently provide the most essential study materials every week—curated to match your academic needs and support your ongoing learning.
             </p>
-            <div className="flex-1"/>
+            <div className="flex-1" />
           </div>
         </div>
       </section>
