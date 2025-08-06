@@ -9,7 +9,7 @@ const Footer : React.FC = () => {
   const pathname = usePathname();
 
   const varifyPath = (arr: string) => {
-    if(arr === "/") return true;
+  //  if(arr === "/") return true;
     const commPath = '/communities';
     const newArr = arr.slice(0,12);
 
